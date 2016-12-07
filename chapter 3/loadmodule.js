@@ -1,0 +1,7 @@
+var hello1 = require('./module');
+hello1.setName('BYVoid1');
+
+var hello2 = require('./module');
+hello2.setName('BYVoid2');
+
+hello1.sayHello();
