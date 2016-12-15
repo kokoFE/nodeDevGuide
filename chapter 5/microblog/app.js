@@ -28,9 +28,29 @@ app.configure('production', function(){
 });
 
 // Routes
+var users = {
+  'koko': {
+    name: 'kokoFE',
+    website: 'http://www.byvoid.com'
+  }
+};
 
 app.get('/', routes.index);
 app.get('/hello', routes.hello);
+app.all('/user/:username', function(req, res, next){
+  if (users[req.params.username]) {
+    next();
+  } else {
+    next(new Error(req.params.username + 'does not exist.'));
+  }
+});
+app.get('/user/:username', function(req, res){
+  // res.send('user: ' + req.params.username);
+  res.send(JSON.stringify(users[req.params.username]));
+});
+app.put('/user/:useranme', function(req, res){
+  res.send('Done');
+})
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
