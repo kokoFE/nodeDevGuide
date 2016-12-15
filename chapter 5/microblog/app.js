@@ -12,7 +12,7 @@ var app = module.exports = express.createServer();
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
+  app.set('view engine', 'ejs');``
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -51,6 +51,12 @@ app.get('/user/:username', function(req, res){
 app.put('/user/:useranme', function(req, res){
   res.send('Done');
 })
+app.get('/list', function(req, res){
+  res.render('list', {
+    title: 'List',
+    items: [1991, 'byvoid', 'express', 'Node.js']
+  });
+});
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
