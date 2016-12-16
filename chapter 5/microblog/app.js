@@ -6,7 +6,7 @@
 var express = require('express')
   , routes = require('./routes');
 var MongoStore = require('connect-mongo');
-var settings = require('../settings');
+var settings = require('./settings');
 
 var app = module.exports = express.createServer();
 
@@ -21,10 +21,10 @@ app.configure(function(){
   app.use(express.session({
     secret: settings.cookieSecret,
     store: new MongoStore({
-      db: setting.db
+      db: settings.db
     })
   }));
-  app.use(app.router);
+  app.use(express.router(routes));
   app.use(express.static(__dirname + '/public'));
 });
 
